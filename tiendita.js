@@ -10,7 +10,6 @@ btnSave.onclick = () => {
     let txtNombre = document.getElementById("nombre");
     let txtPrecio = document.getElementById("precio");
     let txtCantidad = document.getElementById("cantidad");
-
     if(txtNombre.value == "" || txtPrecio.value == "" || txtCantidad.value == ""){
         alert("ERROR: CAMPOS VACIOS");
         return;
@@ -23,11 +22,8 @@ btnSave.onclick = () => {
     };
 
     productos.push(producto);
-
     localStorage.setItem("productos", JSON.stringify(productos));
-
     document.getElementById("addProductos").close();
-
     txtNombre.value = "";
     txtPrecio.value = "";
     txtCantidad.value = "";
@@ -56,7 +52,6 @@ btnEdit.onclick = () => {
     productos[posicion.value].cantidad = txtCantidad.value;
 
     localStorage.setItem("productos", JSON.stringify(productos));
-
     document.getElementById("editProducto").close();
 
     txtNombre.value = "";
@@ -71,17 +66,11 @@ btnEdit.onclick = () => {
 
 
 const cargarProductos = () => {
-
     let posicion = 0;
-
     productos = JSON.parse(localStorage.getItem("productos")) || [];
-
     let tabla = document.getElementById("productos");
-
     let contenido = "";
-
     productos.map((producto) => {
-
         contenido += `<tr>
 
             <td class="text-center">
@@ -97,25 +86,20 @@ const cargarProductos = () => {
             </td>
 
             <td class="text-center">
-
                 <button class="btn btn-danger"
                     onclick="eliminarProducto(${posicion})">
-
                     <i class="bi bi-trash"></i>
-
                 </button>
 
                 <button class="btn btn-warning"
                     onclick="editarProducto(${posicion})">
 
                     <i class="bi bi-pencil"></i>
-
                 </button>
 
             </td>
 
         </tr>`;
-
         posicion++;
 
     });
@@ -138,9 +122,7 @@ const editarProducto = (posicion) => {
     document.getElementById("nombree").value = producto.nombre;
     document.getElementById("precioe").value = producto.precio;
     document.getElementById("cantidade").value = producto.cantidad;
-
     document.getElementById("posicion").value = posicion;
-
     document.getElementById("editProducto").showModal();
 
 };
@@ -159,7 +141,6 @@ const swalWithBootstrapButtons = Swal.mixin({
 
 });
 
-
 const negro = Swal.mixin({
 
     customClass: {
@@ -169,8 +150,6 @@ const negro = Swal.mixin({
     buttonsStyling: false
 
 });
-
-
 
 
 const eliminarProducto = (posicion) => {
@@ -188,11 +167,8 @@ const eliminarProducto = (posicion) => {
     }).then((result) => {
 
         if(result.isConfirmed){
-
             productos.splice(posicion, 1);
-
             localStorage.setItem("productos", JSON.stringify(productos));
-
             cargarProductos();
 
             negro.fire({
